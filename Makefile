@@ -1,5 +1,7 @@
 
+CLI=sbcl
+
 test: 
-	sh meditate.sh sbcl
+	sbcl --script contemplate.lsp
 
 .PHONY: test
