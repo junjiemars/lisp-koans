@@ -90,15 +90,15 @@
     (let ((manning-1 (make-american-football-player :name "Manning" :team '("Colts" "Broncos")))
           (manning-2 (make-american-football-player :name "Manning" :team '("Colts" "Broncos"))))
       ;; manning-1 and manning-2 are different objects
-      (true-or-false? ___ (eq manning-1 manning-2))
+      (true-or-false? nil (eq manning-1 manning-2))
       ;; but manning-1 and manning-2 contain the same information
       ;; (note the equalp instead of eq
-      (true-or-false? ___ (equalp manning-1 manning-2))
+      (true-or-false? t (equalp manning-1 manning-2))
       ;; copied structs are much the same.
-      (true-or-false? ___ (equalp manning-1 (copy-american-football-player manning-1)))
-      (true-or-false? ___ (eq     manning-1 (copy-american-football-player manning-1)))
+      (true-or-false? t (equalp manning-1 (copy-american-football-player manning-1)))
+      (true-or-false? nil (eq manning-1 (copy-american-football-player manning-1)))
       ;; note that the copying is shallow
       (let ((shallow-copy (copy-american-football-player manning-1)))
         (setf (car (nfl-guy-team manning-1)) "Giants")
-        (assert-equal ___ (car (nfl-guy-team manning-1)))
-        (assert-equal ___ (car (nfl-guy-team shallow-copy))))))
+        (assert-equal "Giants" (car (nfl-guy-team manning-1)))
+        (assert-equal "Giants" (car (nfl-guy-team shallow-copy))))))
