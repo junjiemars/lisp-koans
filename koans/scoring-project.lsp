@@ -50,8 +50,28 @@
 ; Your goal is to write the score method.
 
 (defun score (dice)
-  ; You need to write this method
-)
+  ;; You need to write this method
+  (when (null dice) nil)
+  (labels ((bonus-3 (x) (if (= 1 x)
+                            1000
+                            (* 100 x)))
+           (points (x c b3 b1)
+             (cond ((>= c 3) (+ (bonus-3 x)
+                                (* b1 (- c 3))))
+                   (t (* b1 c)))))
+    (loop for x in dice
+       when (= 1 x) count x into ones
+       when (= 2 x) count x into twos
+       when (= 3 x) count x into threes
+       when (= 4 x) count x into fours
+       when (= 5 x) count x into fives
+       when (= 6 x) count x into sixes
+       finally (return (+ (points 1 ones 1000 100)
+                          (points 2 twos 100 0)
+                          (points 3 threes 100 0)
+                          (points 4 fours 100 0)
+                          (points 5 fives 100 50)
+                          (points 6 sixes 100 0))))))
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))
