@@ -22,16 +22,18 @@
 
 ;;  YOU WRITE THIS PART:
 (defclass dice-set ()
-  () ;; WRITE DICE-SET CLASS BODY HERE
-)
+  ;; WRITE DICE-SET CLASS BODY HERE
+  ((points :reader get-values :writer random-values :initform 0)))
 
 (defmethod get-values ((object dice-set))
   ;; WRITE GET-VALUES METHOD DEFINITION HERE
-)
+  (slot-value object 'points))
 
 (defmethod roll (how-many (object dice-set))
   ;; WRITE ROLL METHOD DEFINITION HERE
-)
+  (setf (slot-value object 'points)
+        (loop for x from 1 to how-many
+           collect (random 6))))
 
 
 (define-test test-create-dice-set
