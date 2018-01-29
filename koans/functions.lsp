@@ -113,7 +113,10 @@
    (list a b c x))
 
 (define-test test-many-kinds-params
-    "CL provides the programmer with more than enough rope to hang himself."
+    "CL provides the programmer with more than enough rope to hang himself.
+NOTE: &rest organize &key parameters into list, and the number of &rest parameters
+can not outside &keys, it is good.
+"
   (assert-equal (func-with-funky-parameters 1) '(1 nil 1 nil))
   (assert-equal (func-with-funky-parameters 1 :b 2) '(1 2 1 (:b 2)))
   (assert-equal (func-with-funky-parameters 1 :b 2 :c 3) '(1 2 3 (:b 2 :c 3)))
